@@ -6,7 +6,7 @@
 /*   By: nmei <nmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 20:06:38 by nmei              #+#    #+#             */
-/*   Updated: 2018/02/11 08:45:46 by nmei             ###   ########.fr       */
+/*   Updated: 2018/02/11 12:41:06 by nmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,37 @@ static int	get_compound_arg(t_b64_opts *opt, char **path, int *i, char *o_type)
 	return (0);
 }
 
-void		disp_b64_usage(void)
+void		disp_b64_usage(t_b64_opts *opt, char *inval_opt)
 {
+	if (inval_opt)
+		ft_dprintf(2, "%s: Unknown option [%s]\n", opt->cmd_name, inval_opt);
 	ft_dprintf(2, "\nUsage: ./ft_ssl base64 [b64 opts] [b64 args]\n");
 	ft_dprintf(2, "[-e]: Encrypt input to base64\n");
 	ft_dprintf(2, "[-d]: Decrypt base64 input to plaintext\n");
 	ft_dprintf(2, "[-i]: Specify input stream\n");
 	ft_dprintf(2, "[-o]: Specify output stream\n");
 	ft_dprintf(2, "[-h]: Displays base64 usage (like right now!)\n\n");
-	ft_dprintf(2, "Options not in this list will be **ignored**!!\n\n");
 	exit(0);
 }
 
 void		parse_b64_args(t_b64_opts *opt)
 {
 	int		i;
+	int		f_start;
 
 	i = 2;
 	while (i < opt->argc)
 	{
+		f_start = opt->flags;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-e") == 0) ? E_FLAG : 0;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-d") == 0) ? D_FLAG : 0;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-h") == 0) ? H_FLAG : 0;
-		if (opt->flags & H_FLAG)
-			disp_b64_usage();
 		if (get_compound_arg(opt, &opt->ipath, &i, "-i"))
 			continue ;
 		if (get_compound_arg(opt, &opt->opath, &i, "-o"))
 			continue ;
+		if (opt->flags == f_start || (opt->flags & H_FLAG))
+			disp_b64_usage(opt, (opt->flags & H_FLAG) ? NULL : opt->argvs[i]);
 		i++;
 	}
 }

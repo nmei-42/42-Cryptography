@@ -6,7 +6,7 @@
 /*   By: nmei <nmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 14:32:56 by nmei              #+#    #+#             */
-/*   Updated: 2018/02/11 08:46:07 by nmei             ###   ########.fr       */
+/*   Updated: 2018/02/11 12:33:44 by nmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ static int	get_compnd_arg(t_des_opts *opt, char **opt_str, int *i,
 	return (0);
 }
 
-void		disp_des_usage(t_des_opts *opt)
+void		disp_des_usage(t_des_opts *opt, char *inval_opt)
 {
+	if (inval_opt)
+		ft_dprintf(2, "%s: Unknown option [%s]\n", opt->cmd_name, inval_opt);
 	ft_dprintf(2, "\nUsage: ./ft_ssl %s [%s opts] [%s args]\n",
 					opt->cmd_name, opt->cmd_name, opt->cmd_name);
 	ft_dprintf(2, "[-e]:\t\tEncrypt input with %s\n", opt->cmd_name);
@@ -51,19 +53,15 @@ void		disp_des_usage(t_des_opts *opt)
 	ft_dprintf(2, "[-i]:\t\tSpecify input stream\n");
 	ft_dprintf(2, "[-o]:\t\tSpecify output stream\n");
 	ft_dprintf(2, "[-a]:\t\tBase64 process the data. If [-e] is specified"
-					" then the output ciphertext is base64 encoded.\n\t\tIf"
-					" [-d] is specified then input data is base64 decoded"
-					"  before decryption occurs.\n");
+	" then the output ciphertext is base64 encoded.\n\t\tIf [-d] is specified"
+	" then input data is base64 decoded before decryption occurs.\n");
 	ft_dprintf(2, "[-k]:\t\tThe actual key to use for encryption or decryption"
 					" (Must be a string comprised of only hex digits).\n");
 	ft_dprintf(2, "[-v]:\t\tSpecify an initialization vector to use with CBC"
-					" encryption mode (Must be a string comprised of only"
-					" hex digits).\n");
-	ft_dprintf(2, "[-nopad]:\tDisable default PKCS#7 padding of input data"
-					" with [-e]. Disables default padding removal from"
-					" decrypted outputs with [-d].\n");
+	" encryption mode (Must be a string comprised of only hex digits).\n");
+	ft_dprintf(2, "[-nopad]:\tDisable PKCS#7 padding of input data with [-e]."
+	" Disables default padding removal from decrypted outputs with [-d].\n");
 	ft_dprintf(2, "[-h]:\t\tDisplays %s usage (like now!)\n\n", opt->cmd_name);
-	ft_dprintf(2, "Options not in this list will be **ignored**!!\n\n");
 	(opt->ipath) ? free(opt->ipath) : 0;
 	(opt->opath) ? free(opt->opath) : 0;
 	(opt->des_key) ? free(opt->des_key) : 0;
@@ -74,17 +72,17 @@ void		disp_des_usage(t_des_opts *opt)
 void		parse_des_args(t_des_opts *opt)
 {
 	int		i;
+	int		f_start;
 
 	i = 2;
 	while (i < opt->argc)
 	{
+		f_start = opt->flags;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-e") == 0) ? E_FLAG : 0;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-d") == 0) ? D_FLAG : 0;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-a") == 0) ? A_FLAG : 0;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-nopad") == 0) ? NP_FLAG : 0;
 		opt->flags |= (ft_strcmp(opt->argvs[i], "-h") == 0) ? H_FLAG : 0;
-		if (opt->flags & H_FLAG)
-			disp_des_usage(opt);
 		if (get_compnd_arg(opt, &opt->ipath, &i, "-i"))
 			continue ;
 		if (get_compnd_arg(opt, &opt->opath, &i, "-o"))
@@ -93,6 +91,8 @@ void		parse_des_args(t_des_opts *opt)
 			continue ;
 		if ((opt->flags & CBC) && get_compnd_arg(opt, &opt->des_ivec, &i, "-v"))
 			continue ;
+		if ((opt->flags == f_start) || (opt->flags & H_FLAG))
+			disp_des_usage(opt, ((opt->flags & H_FLAG) ? NULL : opt->argvs[i]));
 		i++;
 	}
 }
