@@ -79,3 +79,6 @@ Triple the fun!
 * https://en.wikipedia.org/wiki/S-box
 * https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation
 * https://en.wikipedia.org/wiki/Triple_DES
+
+### Acknowledgements
+Special thanks to [izcet](https://github.com/izcet) for ghostwriting the exercises for the 42 cryptography branch.
