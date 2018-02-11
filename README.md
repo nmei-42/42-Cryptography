@@ -72,10 +72,10 @@ Decrypting DES3-CBC back to plaintext:
 Triple the fun!
 ```
 ### Useful resources
-https://www.di-mgt.com.au/cryptopad.html
-http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm
-https://en.wikipedia.org/wiki/Data_Encryption_Standard
-https://en.wikipedia.org/wiki/DES_supplementary_material#Rotations_in_the_key-schedule
-https://en.wikipedia.org/wiki/S-box
-https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation
-https://en.wikipedia.org/wiki/Triple_DES
+* https://www.di-mgt.com.au/cryptopad.html
+* http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm
+* https://en.wikipedia.org/wiki/Data_Encryption_Standard
+* https://en.wikipedia.org/wiki/DES_supplementary_material#Rotations_in_the_key-schedule
+* https://en.wikipedia.org/wiki/S-box
+* https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation
+* https://en.wikipedia.org/wiki/Triple_DES
