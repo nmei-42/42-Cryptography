@@ -82,4 +82,5 @@ Triple the fun!
 
 ### Acknowledgements
 Thanks to [Johnny](https://github.com/JohnnyJumper) and waliu @ 42 for battle testing my code!
+
 Special thanks to [izcet](https://github.com/izcet) for ghostwriting the exercises for the 42 cryptography branch.
