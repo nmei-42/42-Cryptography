@@ -72,6 +72,7 @@ Decrypting DES3-CBC back to plaintext:
 Triple the fun!
 ```
 ### Useful resources
+* https://www.openssl.org/
 * https://www.di-mgt.com.au/cryptopad.html
 * http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm
 * https://en.wikipedia.org/wiki/Data_Encryption_Standard
