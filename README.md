@@ -71,3 +71,11 @@ Decrypting DES3-CBC back to plaintext:
 > ./ft_ssl des3 -k AABBCCDDEEFFAABB1122334455667788DDAABBCCDDAABBCC -v 8877665544332211 -a -d <<< "Z0tpVBnbqGE511s7PKx0V85r+LYlgSPm"
 Triple the fun!
 ```
+### Useful resources
+https://www.di-mgt.com.au/cryptopad.html
+http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm
+https://en.wikipedia.org/wiki/Data_Encryption_Standard
+https://en.wikipedia.org/wiki/DES_supplementary_material#Rotations_in_the_key-schedule
+https://en.wikipedia.org/wiki/S-box
+https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation
+https://en.wikipedia.org/wiki/Triple_DES
